@@ -1,0 +1,91 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-module-flags: -target arm64-apple-ios11.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FlybitsContextLocationPluginSDK
+import CoreLocation
+import FlybitsContextSDK
+import FlybitsSDK
+import Foundation
+import Swift
+import UIKit
+@objc @_inheritsConvenienceInitializers public class LocationServicesAnalyticsContext : ObjectiveC.NSObject {
+  public static func trackAlways(value: Swift.Bool = true, timestamp: Swift.Double? = nil, sendImmediately: Swift.Bool = false)
+  public static func trackInUse(value: Swift.Bool = true, timestamp: Swift.Double? = nil, sendImmediately: Swift.Bool = false)
+  public static func trackNever(value: Swift.Bool = true, timestamp: Swift.Double? = nil, sendImmediately: Swift.Bool = false)
+  public static func trackPermissionStateAsAlways(timestamp: Swift.Double? = nil, sendImmediately: Swift.Bool = true)
+  public static func trackPermissionStateAsInApp(timestamp: Swift.Double? = nil, sendImmediately: Swift.Bool = true)
+  public static func trackPermissionStateAsNever(timestamp: Swift.Double? = nil, sendImmediately: Swift.Bool = true)
+  @objc deinit
+  @objc override dynamic public init()
+}
+@objc public protocol LocationContextPluginDelegate : AnyObject {
+  @objc optional func locationContextPlugin(didChangeAuthorization status: CoreLocation.CLAuthorizationStatus)
+  @available(iOS 14.0, *)
+  @objc optional func locationManagerDidChangeAuthorization(with status: CoreLocation.CLAuthorizationStatus, and accuracy: CoreLocation.CLAccuracyAuthorization)
+  @objc optional func locationContextPlugin(didUpdateLocations locations: [CoreLocation.CLLocation])
+  @objc optional func locationContextPlugin(didFailWithError error: Swift.Error)
+  @objc optional func locationContextPlugin(didStartMonitoringFor region: CoreLocation.CLRegion)
+  @objc optional func locationContextPlugin(didExitRegion region: CoreLocation.CLRegion)
+  @objc optional func locationContextPlugin(didDetermineState: CoreLocation.CLRegionState, for region: CoreLocation.CLRegion)
+  @objc optional func locationContextPlugin(monitoringDidFailFor region: CoreLocation.CLRegion?, withError error: Swift.Error)
+  @objc optional func locationContextPluginStopped()
+}
+@_inheritsConvenienceInitializers @objc(LocationAuthorization) public class LocationAuthorization : ObjectiveC.NSObject, FlybitsContextSDK.FlybitsLocationAuthorization {
+  public var authorizationStatus: FlybitsContextSDK.FlybitsLocationAuthorizationStatus {
+    get
+  }
+  @objc required override dynamic public init()
+  public func forceFetchAuthorizationStatus(completion: @escaping (FlybitsContextSDK.FlybitsLocationAuthorizationStatus) -> Swift.Void)
+  @objc deinit
+}
+extension LocationAuthorization {
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class LocationPluginOperationResult : ObjectiveC.NSObject {
+  public var success: Swift.Bool {
+    get
+  }
+  public var failReason: FlybitsContextLocationPluginSDK.LocationPluginOperationResult.OperationErrors {
+    get
+  }
+  @objc public enum OperationErrors : Swift.Int {
+    case none
+    case noPermission
+    public typealias RawValue = Swift.Int
+    public init?(rawValue: Swift.Int)
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class LocationContextPlugin : ObjectiveC.NSObject, FlybitsContextSDK.ContextPlugin {
+  @objc public var pluginId: Swift.String {
+    @objc get
+  }
+  @objc public var bundleName: Swift.String {
+    get
+  }
+  @objc public var keyInfoPlist: [Swift.String]? {
+    get
+  }
+  @objc public var isRunning: Swift.Bool {
+    @objc get
+  }
+  @objc weak public var delegate: FlybitsContextSDK.ContextDelegate?
+  @objc public var delegates: [FlybitsContextLocationPluginSDK.LocationContextPluginDelegate] {
+    @objc get
+  }
+  @objc required override dynamic public init()
+  @objc deinit
+  @objc public func start(launchOptions: [UIKit.UIApplication.LaunchOptionsKey : Any]? = nil) -> Swift.Bool
+  @objc public func stop() -> Swift.Bool
+  @objc public func refreshData() -> UIKit.UIBackgroundFetchResult
+}
+extension LocationContextPlugin {
+  @objc dynamic public func addDelegate(_ delegate: FlybitsContextLocationPluginSDK.LocationContextPluginDelegate)
+  @objc dynamic public func removeDelegate(_ delegate: FlybitsContextLocationPluginSDK.LocationContextPluginDelegate)
+}
+extension LocationContextPlugin {
+}
+extension FlybitsContextLocationPluginSDK.LocationPluginOperationResult.OperationErrors : Swift.Equatable {}
+extension FlybitsContextLocationPluginSDK.LocationPluginOperationResult.OperationErrors : Swift.Hashable {}
+extension FlybitsContextLocationPluginSDK.LocationPluginOperationResult.OperationErrors : Swift.RawRepresentable {}
