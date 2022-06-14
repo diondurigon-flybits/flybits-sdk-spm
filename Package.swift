@@ -6,9 +6,19 @@ import PackageDescription
 let package = Package(
     name: "Flybits",
     products: [
-        .library(name: "Concierge", targets: ["FlybitsCoreConcierge", "FlybitsSDK", "FlybitsPushSDK", "FlybitsKernelSDK", "FlybitsContextSDK", "FlybitsConcierge"]),
-        .library(name: "Location", targets: ["FlybitsSDK", "FlybitsContextSDK", "FlybitsContextLocationPluginSDK"]),
-        .library(name: "Core", targets: ["FlybitsSDK", "FlybitsPushSDK", "FlybitsKernelSDK", "FlybitsContextSDK"]),
+        .library(name: "Concierge", targets: ["FlybitsCoreConcierge",
+                                              "FlybitsSDK",
+                                              "FlybitsPushSDK",
+                                              "FlybitsKernelSDK",
+                                              "FlybitsContextSDK",
+                                              "FlybitsConcierge"]),
+        .library(name: "Location", targets: ["FlybitsSDK",
+                                             "FlybitsContextSDK",
+                                             "FlybitsContextLocationPluginSDK"]),
+        .library(name: "Core", targets: ["FlybitsSDK",
+                                         "FlybitsPushSDK",
+                                         "FlybitsKernelSDK",
+                                         "FlybitsContextSDK"]),
     ],
     targets: [
         .binaryTarget(name: "FlybitsSDK", path: "Frameworks/FlybitsSDK.xcframework"),
